@@ -35,6 +35,54 @@ const DefaultDemo = () => {
       value: 'Node2',
       title: 'Node2',
     },
+    {
+      value: 'Node3',
+      title: (
+        <>
+          <UnorderedListOutlined /> Node3
+        </>
+      ),
+      children: [
+        {
+          value: 'Node3-1',
+          title: (
+            <>
+              <UnorderedListOutlined /> Node3-1
+            </>
+          ),
+        },
+        {
+          value: 'Node3-2',
+          title: (
+            <>
+              <UnorderedListOutlined /> Node3-2
+            </>
+          ),
+          children: [
+            {
+              value: 'Node3-2-1',
+              title: 'Node3-2-1',
+            },
+            {
+              value: 'Node3-2-2',
+              title: 'Node3-2-2',
+            },
+            {
+              value: 'Node3-2-3',
+              title: 'Node3-2-3',
+            },
+            {
+              value: 'Node3-2-4',
+              title: 'Node3-2-4',
+            },
+            {
+              value: 'Node3-2-5',
+              title: 'Node3-2-5',
+            },
+          ]
+        },
+      ],
+    },
   ]);
 
   return (

@@ -1,13 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Trigger from 'rc-trigger';
 import { ConfigContext } from 'antd/lib/config-provider';
-import { Button } from 'antd'
 import { CascaderPlusProps } from './CascaderPlus';
 import CascaderPlusContainer from '../container';
 import { prefix } from '../constants';
 import Popup from './Popup';
 import BUILT_IN_PLACEMENTS from '@/libs/placement';
 import Selector from './Selector';
+import { TreeNode } from '../index.d';
+import { reconcile } from '@/libs/utils';
 
 const CascaderComponent = React.memo(
   React.forwardRef((props: CascaderPlusProps, ref) => {
@@ -33,7 +34,17 @@ const CascaderComponent = React.memo(
       // console.log(visible)
       setPopupVisible(visible)
     }
-    const handleItemRemove = () => { }
+    const handleItemRemove = useCallback(
+      (item: TreeNode | string) => {
+        let nextValue: string[];
+        if (typeof item === 'string') {
+          nextValue = value.filter((v: string) => v !== item)
+        } else {
+          nextValue = reconcile(item, false, value)
+        }
+
+        triggerChange(nextValue);
+      }, [value, triggerChange])
 
     const handleClear = () => { }
 

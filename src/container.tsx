@@ -81,14 +81,15 @@ const useCascader = (params?: CascaderPlusProps) => {
 
   },[flattenData, valueProp, popupVisible, value])
 
-  // const triggerChange = useCallback(
-  //   (nextValue: ValueType[]) => {
-  //     if(onChange){
-  //       onChange(nextValue, selectedItems.slice(0))
-  //     }
-  //     hackValue.current = nextValue;
-
-  // }, [selectedItems])
+  const triggerChange = useCallback(
+    (nextValue: ValueType[]) => {
+      // if(onChange){
+      //   onChange(nextValue, selectedItems.slice(0))
+      // }
+      // hackValue.current = nextValue;
+      setValue(nextValue);
+      setPopupVisible(false);
+  }, [selectedItems])
 
 
   const lastItemRef = useRef<TreeNode | null>(null);
@@ -180,7 +181,9 @@ const useCascader = (params?: CascaderPlusProps) => {
     handleSelectChange,
     value,
     hackValue,
-    selectedItems
+    selectedItems,
+    triggerChange,
+
   }
 }
 

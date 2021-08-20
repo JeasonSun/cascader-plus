@@ -1,12 +1,13 @@
 import React, { forwardRef, Ref, useCallback } from "react";
 import { TreeNode } from "../index.d";
 import { CascaderPlusProps } from "./CascaderPlus";
-import { Tag } from 'antd';
-import {keyBy} from 'lodash';
+import Tag from './Tag';
+import { keyBy } from 'lodash';
 import CascaderPlusContainer from '../container';
 import classNames from "classnames";
 import { prefix } from "@/constants";
 import Overflow from 'rc-overflow';
+import { DownOutlined } from "@ant-design/icons";
 
 
 export interface SelectorProps extends CascaderPlusProps {
@@ -50,19 +51,28 @@ const Selector = (props: SelectorProps) => {
   const selectedItemsMap = keyBy(selectedItems, 'value');
 
 
+
   const renderItem = useCallback((item: string) => {
     return (
-      <Tag key={selectedItemsMap[item] || item}>
-        {item}
-      </Tag>
+      <Tag
+        key={item}
+        onRemove={onRemove}
+        item={selectedItemsMap[item] || item}
+        renderTitle={renderTitle}
+      />
     )
-  },[selectedItemsMap, renderTitle, onRemove] )
+  }, [selectedItemsMap, renderTitle, onRemove])
 
   const renderRest = useCallback((omittedValues: string[]) => {
-      <Tag>
-        <span>+{omittedValues.length}...</span>
-      </Tag>
-  },[])
+    <Tag
+      closable={false}
+      renderTitle={() => <span>+{omittedValues.length}...</span>}
+      item={{
+        title: '',
+        value: '',
+      }}
+    />
+  }, [])
 
   // const values = valueProps || hackValue.current || []
   const values = valueProps || containerValue || []
@@ -84,16 +94,16 @@ const Selector = (props: SelectorProps) => {
       {...rest}
     >
       <div className="ant-select-selector"
-        style={{ paddingRight: !disabled && allowClear ? '24px' : undefined }}
+        style={{ paddingRight: '24px' }}
       >
         {
           values.length ? (
             <Overflow
               prefixCls={`${prefix}-overflow`}
               data={values}
-              renderItem = {renderItem}
-              renderRest = {renderRest}
-              maxCount = { maxTagCount}
+              renderItem={renderItem}
+              renderRest={renderRest}
+              maxCount={maxTagCount}
             />
           ) : (
             <span
@@ -104,6 +114,9 @@ const Selector = (props: SelectorProps) => {
           )
         }
       </div>
+      <span className="ant-cascader-picker-arrow">
+        <DownOutlined />
+      </span>
     </div>
   )
 }

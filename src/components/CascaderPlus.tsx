@@ -43,7 +43,7 @@ const CascaderPlus: React.FunctionComponent<CascaderPlusProps> = React.forwardRe
 CascaderPlus.defaultProps = {
   data: [],
   value: undefined,
-  placeholder: '请选择'
+  placeholder: '请选择',
 }
 
 export default CascaderPlus;
