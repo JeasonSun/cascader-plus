@@ -27,12 +27,12 @@ const Selector = (props: SelectorProps) => {
     disabled,
     data,
     selectAll,
-    value: valueProps,
+    // value: valueProps,
     onChange,
     okText,
     cancelText,
     selectAllText,
-    onCascaderChange,
+    loadData,
     popupTransitionName,
     renderTitle,
     selectLeafOnly,
@@ -41,9 +41,11 @@ const Selector = (props: SelectorProps) => {
     ...rest
   } = props;
 
+  // console.log(rest)
+
   const {
     selectedItems,
-    hackValue,
+    // hackValue,
     value: containerValue,
 
   } = CascaderPlusContainer.useContainer();
@@ -75,7 +77,7 @@ const Selector = (props: SelectorProps) => {
   }, [])
 
   // const values = valueProps || hackValue.current || []
-  const values = valueProps || containerValue || []
+  const values = containerValue || []
 
 
   return (

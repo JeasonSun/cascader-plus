@@ -205,8 +205,62 @@ export function transformValue(value: ValueType[], flattenData: TreeNode[]): Val
       // TODO: 选中后需要整合数据
       nextValue = reconcile(node, true, nextValue)
     } else {
+      // TODO: 这个似乎是在flattenData中没有，应该是异步加载的数据。
       nextValue.push(value[i])
     }
   }
   return sortByTree(nextValue, flattenData)
 }
+
+
+// 通过 value 查找树节点
+export function findNodeByValue(
+  value: string,
+  tree: TreeNode[]
+): TreeNode | undefined {
+  function findParent(nodes: TreeNode[]): TreeNode | undefined {
+    if (!nodes) {
+      return undefined
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i]
+
+      if (value === node.value) {
+        return node
+      }
+      if (node.children) {
+        const foundInChildren = findParent(node.children)
+        if (foundInChildren) {
+          return foundInChildren
+        }
+      }
+    }
+  }
+
+  return findParent(tree)
+}
+
+
+// export function shallowEqualArray(arrA: any, arrB: any) {
+//   if (arrA === arrB) {
+//     return true
+//   }
+
+//   if (!arrA || !arrB) {
+//     return false
+//   }
+
+//   var len = arrA.length
+
+//   if (arrB.length !== len) {
+//     return false
+//   }
+
+//   for (var i = 0; i < len; i++) {
+//     if (arrA[i] !== arrB[i]) {
+//       return false
+//     }
+//   }
+
+//   return true
+// }

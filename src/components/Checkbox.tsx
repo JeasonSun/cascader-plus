@@ -23,6 +23,7 @@ export default React.memo((props: Pick<MenuItemProps, 'node'>) => {
   }, [node])
 
   //判断是否有父节点（包括自己）有被选中,如果在value中有自己的value，那么就是选中的。
+  // console.log(node, containerValue)
   const checked = hasParentChecked(node, containerValue);
 
 

@@ -8,20 +8,22 @@ import CascaderComponent from './CascaderComponent';
 import '../index.less';
 
 export interface CascaderPlusProps {
-  value?: ValueType[];
+  defaultValue?: ValueType[];
   data?: TreeNode[];
   allowClear?: boolean;
   columnWidth?: number;
   placeholder?: string;
   onChange?: (newValue: ValueType[], selectedItems?: TreeNode[]) => void;
-  onCascaderChange?: (
-    node: TreeNode,
-    operations: { add: (children: TreeNode[]) => TreeNode[] }
-  ) => void;
+  loadData?: (node:TreeNode) => Promise<[TreeNode[], TreeNode]>;
+  // onCascaderChange?: (
+  //   node: TreeNode,
+  //   operations: { add: (children: TreeNode[]) => TreeNode[] }
+  // ) => void;
   selectAll?: boolean;
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
+  searchable?: boolean;
   okText?: string;
   cancelText?: string;
   selectAllText?: string;
@@ -42,7 +44,7 @@ const CascaderPlus: React.FunctionComponent<CascaderPlusProps> = React.forwardRe
 
 CascaderPlus.defaultProps = {
   data: [],
-  value: undefined,
+  defaultValue: undefined,
   placeholder: '请选择',
 }
 
