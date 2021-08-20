@@ -25,3 +25,6 @@ Build library via `father-build`,
 ```bash
 $ npm run build
 ```
+
+## 主页
+[CascaderPlus主页](https://jeasonsun.github.io/cascader-plus/)
