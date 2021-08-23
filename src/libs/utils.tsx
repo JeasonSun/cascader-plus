@@ -42,16 +42,16 @@ export function flattenTree(root: TreeNode[]): TreeNode[] {
 export function hasChildChecked(
   item: TreeNode,
   curValue: ValueType[]
-): boolean{
-  function dfs(node:TreeNode): boolean {
-    if(!node){
+): boolean {
+  function dfs(node: TreeNode): boolean {
+    if (!node) {
       return false;
     }
-    const {value, children } = node;
-    if(curValue.includes(value)){
+    const { value, children } = node;
+    if (curValue.includes(value)) {
       return true;
     }
-    if(!children){
+    if (!children) {
       return false;
     }
     return children.some((child: TreeNode) => dfs(child));
@@ -264,3 +264,24 @@ export function findNodeByValue(
 
 //   return true
 // }
+
+export function flattenAllChildren(tree: TreeNode[]): TreeNode[] {
+  const AllChildren: TreeNode[] = [];
+  function dfs(nodes: TreeNode[]) {
+    nodes.forEach((node: TreeNode) => {
+      const parentTitles = node.parent?._titles? node.parent?._titles : node.parent ? [node.parent.title] : [];
+      node._titles = [...parentTitles, node.title];
+      if (node.isLeaf || node.children === undefined) {
+        const item = { ...node, ...{ title: node._titles?.join('/') } }
+        AllChildren.push(item)
+      }
+      if (node.children && node.children.length) {
+        dfs(node.children);
+      }
+    })
+  }
+
+  dfs(tree);
+  console.log(AllChildren)
+  return AllChildren;
+}

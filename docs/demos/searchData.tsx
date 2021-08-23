@@ -1,33 +1,25 @@
+/**
+ * title: 搜索
+ * desc: 通过设置showSearch为true，可以开启组件的搜索功能。
+ *
+ */
 import React, { useState } from 'react';
 import CascaderPlus from 'cascader-plus';
-import { UnorderedListOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 const DefaultDemo = () => {
   const [data] = useState([
     {
       value: 'Node1',
-      title: (
-        <>
-          <UnorderedListOutlined /> Node1
-        </>
-      ),
+      title: "Node1",
       children: [
         {
           value: 'Node1-1',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node1-1
-            </>
-          ),
+          title: 'Node1-1',
         },
         {
           value: 'Node1-2',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node1-2
-            </>
-          ),
+          title: 'Node1-2',
         },
       ],
     },
@@ -37,27 +29,15 @@ const DefaultDemo = () => {
     },
     {
       value: 'Node3',
-      title: (
-        <>
-          <UnorderedListOutlined /> Node3
-        </>
-      ),
+      title: 'Node3',
       children: [
         {
           value: 'Node3-1',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node3-1
-            </>
-          ),
+          title: 'Node3-1',
         },
         {
           value: 'Node3-2',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node3-2
-            </>
-          ),
+          title: 'Node3-2',
           children: [
             {
               value: 'Node3-2-1',
@@ -85,18 +65,13 @@ const DefaultDemo = () => {
     },
   ]);
 
-  const [value, setValue] = useState<string[]>(['Node1-1']);
 
-  const onValueChange = (values: string[]) => {
-    console.log(values)
-  }
 
   return (
     <>
       <CascaderPlus
         data={data}
-        defaultValue={value}
-        onChange= {onValueChange}
+        showSearch
       />
     </>
   );

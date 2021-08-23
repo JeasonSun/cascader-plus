@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Trigger from 'rc-trigger';
 import { ConfigContext } from 'antd/lib/config-provider';
 import { CascaderPlusProps } from './CascaderPlus';
@@ -9,6 +9,7 @@ import BUILT_IN_PLACEMENTS from '@/libs/placement';
 import Selector from './Selector';
 import { TreeNode } from '../index.d';
 import { reconcile } from '@/libs/utils';
+import PopupSearch from './PopupSearch';
 
 const CascaderComponent = React.memo(
   React.forwardRef((props: CascaderPlusProps, ref) => {
@@ -17,7 +18,8 @@ const CascaderComponent = React.memo(
     const {
       disabled,
       popupTransitionName = 'slide-up',
-      getPopupContainer
+      getPopupContainer,
+      showSearch
     } = props;
 
     const {
@@ -27,13 +29,15 @@ const CascaderComponent = React.memo(
       value,
       resetMenuState,
       triggerChange,
+      triggerSearchChange,
+      searchValue,
     } = CascaderPlusContainer.useContainer();
 
-
     const visibleChange = (visible: boolean) => {
-      // console.log(visible)
-      setPopupVisible(visible)
+
+      setPopupVisible(visible);
     }
+
     const handleItemRemove = useCallback(
       (item: TreeNode | string) => {
         let nextValue: string[];
@@ -48,12 +52,16 @@ const CascaderComponent = React.memo(
 
     const handleClear = () => { }
 
+    const handleSearch = useCallback((value: String) => {
+      triggerSearchChange(value);
+    }, [])
+
     return (
       <Trigger
         action={!disabled ? ['click'] : []}
         prefixCls={prefix}
         popup={
-          <Popup {...props} />
+          showSearch && searchValue ? <PopupSearch {...props} /> : <Popup {...props} />
         }
         popupVisible={disabled ? false : popupVisible}
         onPopupVisibleChange={visibleChange}
@@ -71,6 +79,7 @@ const CascaderComponent = React.memo(
           forwardRef={selectorRef}
           onRemove={handleItemRemove}
           onClear={handleClear}
+          onSearch={handleSearch}
           {...props}
         />
       </Trigger>

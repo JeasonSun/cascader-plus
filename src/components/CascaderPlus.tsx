@@ -15,10 +15,8 @@ export interface CascaderPlusProps {
   placeholder?: string;
   onChange?: (newValue: ValueType[], selectedItems?: TreeNode[]) => void;
   loadData?: (node:TreeNode) => Promise<[TreeNode[], TreeNode]>;
-  // onCascaderChange?: (
-  //   node: TreeNode,
-  //   operations: { add: (children: TreeNode[]) => TreeNode[] }
-  // ) => void;
+  showSearch?: boolean;
+  filter?: (value: String) => Promise<TreeNode[]>;
   selectAll?: boolean;
   className?: string;
   style?: React.CSSProperties;

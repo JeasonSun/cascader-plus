@@ -36,3 +36,8 @@ order: 2
 
 <code src="./demos/asyncData.tsx">
 </code>
+
+<code src="./demos/searchData.tsx">
+</code>
+
+

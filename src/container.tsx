@@ -4,6 +4,7 @@ import { TreeNode, ValueType } from './index.d';
 import { CascaderPlusProps } from './components/CascaderPlus';
 import {
   findNodeByValue,
+  flattenAllChildren,
   flattenTree,
   reconcile,
   // shallowEqualArray,
@@ -19,6 +20,7 @@ const useCascader = (params?: CascaderPlusProps) => {
     selectAll,
     onChange,
     loadData,
+    filter,
   } = params || {};
 
   const [popupVisible, setPopupVisible] = useState(false);
@@ -36,6 +38,30 @@ const useCascader = (params?: CascaderPlusProps) => {
     }
     return flattenTree(data || []);
   });
+
+  const [searchValue, setSearchValue] = useState<string|undefined>(undefined);
+  const [searchData, setSearchData ]= useState< TreeNode[]>([]);
+
+
+  const filterLocalData = useCallback((value: string) => {
+    const filterData =  flattenData.filter((node: TreeNode) => {
+      //
+      return value === node.title;
+    })
+    return Promise.resolve(filterData)
+  }, [flattenData]);
+
+  const filterData = filter? filter: filterLocalData;
+
+  const [searchInputFocus, setSearchInputFocus] = useState<boolean>(false);
+
+  // const selectedItems = useMemo(() => {
+  //   return flattenData.filter((node: TreeNode) => {
+  //     return (value).includes(node.value);
+  //   })
+
+  // }, [flattenData, value])
+
 
 
   const transformValue = useCallback(
@@ -55,11 +81,7 @@ const useCascader = (params?: CascaderPlusProps) => {
 
   const [menuPath, setMenuPath] = useState<TreeNode[]>([]);
   const [value, setValue] = useState(transformValue(valueProp || [], 'default'));
-  // const [value, setValue] = useState(() => {
-  //   console.log('setDefault')
-  //   return valueProp
-  // });
-  // const hackValue = useRef(value);
+
   const [menuData, setMenuData] = useState(() => {
     if (selectAll && flattenData.length === 1) {
       return []
@@ -92,13 +114,7 @@ const useCascader = (params?: CascaderPlusProps) => {
   // 这个主要提供给selector的remove使用。
   const triggerChange = useCallback(
     (nextValue: ValueType[]) => {
-      // if(onChange){
-      //   onChange(nextValue, selectedItems.slice(0))
-      // }
-      // hackValue.current = nextValue;
-      // TODO:
       setValue(nextValue);
-      // 如果remove后需要hide popup
       setPopupVisible(false);
     }, [selectedItems])
 
@@ -113,6 +129,15 @@ const useCascader = (params?: CascaderPlusProps) => {
     },
     []
   )
+
+  const triggerSearchChange = useCallback((value: string) => {
+      setSearchValue(value);
+      filterData(value).then((res: TreeNode[]) => {
+        const resSearchData = flattenAllChildren(res);
+        setSearchData(resSearchData);
+      })
+  }, [filterData])
+
 
   const lastItemRef = useRef<TreeNode | null>(null);
 
@@ -169,6 +194,11 @@ const useCascader = (params?: CascaderPlusProps) => {
     setMenuPath([])
   }, [flattenData, selectAll]);
 
+  const resetSearchState = useCallback(() => {
+    setSearchData([]);
+    setSearchValue('');
+  }, []);
+
   useEffect(() => {
     if (onChange) {
       onChange(value, selectedItems.slice(0))
@@ -204,8 +234,10 @@ const useCascader = (params?: CascaderPlusProps) => {
       // setValue(transformValue(valueProp || value , 'effect'));
       // setValue(transformValue(value , 'effect'));
       resetMenuState();
+      resetSearchState();
     }
   }, [popupVisible])
+
 
 
 
@@ -220,7 +252,11 @@ const useCascader = (params?: CascaderPlusProps) => {
     // hackValue,
     selectedItems,
     triggerChange,
-
+    searchData,
+    searchValue,
+    triggerSearchChange,
+    searchInputFocus,
+    setSearchInputFocus,
   }
 }
 
