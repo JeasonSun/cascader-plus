@@ -3,12 +3,20 @@
 ---
 ## CascaderPlus介绍
 
-### 开发记录
-* Tip：主要的状态维护在container中
-* 拿到props.data构建flattenData，即flattenTree方法。
-* flattenTree方法dfs遍历子节点，给子节点添加parent属性，并且替换parent节点中children为newChildren（拥有parent属性的子节点）。如此平铺的树结构，很方便通过value来查找。
-* 在popupVisible改变的时候来重置menuData。首层的menuData就是那些没有parent的节点。
+基于 ant-design 级联组件 cascader 的扩展，主要实现级联选择的多选功能，并且支持本地及远程搜索。
 
+### 功能
+
+- [x] 多选功能
+- [x] 默认值设置
+- [x] 动态加载下一级
+- [x] 多选搜索
+- [x] 多选远程搜索
+- [x] 禁用
+- [x] 设置父级节点选中是否关联
+- [ ] 自定义值渲染
+- [ ] 自定义Item样式
+- [ ] 单选
 
 
 
