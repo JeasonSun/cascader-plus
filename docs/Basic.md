@@ -11,8 +11,8 @@ order: 2
 - [x] 多选功能
 - [x] 默认值设置
 - [x] 动态加载下一级
-- [ ] 多选搜索
-- [ ] 多选远程搜索
+- [x] 多选搜索
+- [x] 多选远程搜索
 - [ ] 滚动加载
 - [ ] 禁用
 - [ ] 设置父级节点选中是否关联
@@ -37,7 +37,10 @@ order: 2
 <code src="./demos/asyncData.tsx">
 </code>
 
-<code src="./demos/searchData.tsx">
+<code src="./demos/searchLocalData.tsx">
+</code>
+
+<code src="./demos/searchRemoteData.tsx">
 </code>
 
 

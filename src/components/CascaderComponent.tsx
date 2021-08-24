@@ -53,6 +53,7 @@ const CascaderComponent = React.memo(
     const handleClear = () => { }
 
     const handleSearch = useCallback((value: String) => {
+      console.log('handleSearch', value)
       triggerSearchChange(value);
     }, [])
 

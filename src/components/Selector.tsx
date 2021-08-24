@@ -42,6 +42,7 @@ const Selector = (props: SelectorProps) => {
     onChange,
     showSearch,
     onSearch,
+    filter,
     okText,
     cancelText,
     selectAllText,
@@ -72,6 +73,7 @@ const Selector = (props: SelectorProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const measureRef = React.useRef<HTMLDivElement>(null);
   const searchPlaceholder = '请选择或输入搜索';
+  const compositionFlag = useRef<boolean>(false);
 
 
   const renderItem = useCallback((item: string) => {
@@ -99,12 +101,23 @@ const Selector = (props: SelectorProps) => {
   const onSearchInputChange = useCallback((e) => {
     const currentInputValue = e.target.value;
     setInputValue(currentInputValue);
-    onSearch?.(currentInputValue);
+    if (!compositionFlag.current) {
+      onSearch?.(currentInputValue);
+    }
   }, [])
 
   const onSearchInputBlur = useCallback((e) => {
 
     setSearchInputFocus(false);
+  }, [])
+
+  const onCompositionStart = useCallback((e) => {
+    compositionFlag.current = true;
+  }, [])
+
+  const onCompositionEnd = useCallback((e) => {
+    compositionFlag.current = false;
+    onSearchInputChange(e);
   }, [])
 
   const triggerInputFocus = useCallback(() => {
@@ -190,6 +203,8 @@ const Selector = (props: SelectorProps) => {
                       onChange={onSearchInputChange}
                       onBlur={onSearchInputBlur}
                       onFocus={onSearchInputFocus}
+                      onCompositionStart={onCompositionStart}
+                      onCompositionEnd={onCompositionEnd}
                       ref={inputRef}
                     />
                     <div
@@ -225,6 +240,8 @@ const Selector = (props: SelectorProps) => {
               onChange={onSearchInputChange}
               onBlur={onSearchInputBlur}
               onFocus={onSearchInputFocus}
+              onCompositionStart={onCompositionStart}
+              onCompositionEnd={onCompositionEnd}
               ref={inputRef}
             />
         }

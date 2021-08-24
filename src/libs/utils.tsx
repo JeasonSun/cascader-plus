@@ -282,6 +282,6 @@ export function flattenAllChildren(tree: TreeNode[]): TreeNode[] {
   }
 
   dfs(tree);
-  console.log(AllChildren)
+  // console.log(AllChildren)
   return AllChildren;
 }

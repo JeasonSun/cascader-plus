@@ -39,19 +39,20 @@ const useCascader = (params?: CascaderPlusProps) => {
     return flattenTree(data || []);
   });
 
-  const [searchValue, setSearchValue] = useState<string|undefined>(undefined);
-  const [searchData, setSearchData ]= useState< TreeNode[]>([]);
+  const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
+  const [searchData, setSearchData] = useState<TreeNode[]>([]);
+  const [searchLoading, setSearchLoading] = useState<boolean>(false);
 
 
   const filterLocalData = useCallback((value: string) => {
-    const filterData =  flattenData.filter((node: TreeNode) => {
+    const filterData = flattenData.filter((node: TreeNode) => {
       //
       return value === node.title;
     })
     return Promise.resolve(filterData)
   }, [flattenData]);
 
-  const filterData = filter? filter: filterLocalData;
+  const filterData = filter ? filter : filterLocalData;
 
   const [searchInputFocus, setSearchInputFocus] = useState<boolean>(false);
 
@@ -131,11 +132,14 @@ const useCascader = (params?: CascaderPlusProps) => {
   )
 
   const triggerSearchChange = useCallback((value: string) => {
-      setSearchValue(value);
-      filterData(value).then((res: TreeNode[]) => {
-        const resSearchData = flattenAllChildren(res);
-        setSearchData(resSearchData);
-      })
+    setSearchValue(value);
+    setSearchLoading(true);
+    Promise.resolve(filterData(value)).then((res: TreeNode[]) => {
+      const data = Array.isArray(res) ? res : []
+      const resSearchData = flattenAllChildren(data);
+      setSearchData([...resSearchData]);
+      setSearchLoading(false);
+    })
   }, [filterData])
 
 
@@ -257,6 +261,7 @@ const useCascader = (params?: CascaderPlusProps) => {
     triggerSearchChange,
     searchInputFocus,
     setSearchInputFocus,
+    searchLoading,
   }
 }
 
