@@ -22,6 +22,7 @@ export interface CascaderPlusProps {
   style?: React.CSSProperties;
   disabled?: boolean;
   searchable?: boolean;
+  simplify?: boolean;
   okText?: string;
   cancelText?: string;
   selectAllText?: string;
@@ -44,6 +45,7 @@ CascaderPlus.defaultProps = {
   data: [],
   defaultValue: undefined,
   placeholder: '请选择',
+  simplify: true
 }
 
 export default CascaderPlus;

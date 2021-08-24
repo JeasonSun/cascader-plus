@@ -4,86 +4,50 @@ import { UnorderedListOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 const DefaultDemo = () => {
-  const [data] = useState([
-    {
-      value: 'Node1',
-      title: (
-        <>
-          <UnorderedListOutlined /> Node1
-        </>
-      ),
-      children: [
-        {
-          value: 'Node1-1',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node1-1
-            </>
-          ),
-        },
-        {
-          value: 'Node1-2',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node1-2
-            </>
-          ),
-        },
-      ],
-    },
-    {
-      value: 'Node2',
-      title: 'Node2',
-    },
-    {
-      value: 'Node3',
-      title: (
-        <>
-          <UnorderedListOutlined /> Node3
-        </>
-      ),
-      children: [
-        {
-          value: 'Node3-1',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node3-1
-            </>
-          ),
-        },
-        {
-          value: 'Node3-2',
-          title: (
-            <>
-              <UnorderedListOutlined /> Node3-2
-            </>
-          ),
-          children: [
-            {
-              value: 'Node3-2-1',
-              title: 'Node3-2-1',
-            },
-            {
-              value: 'Node3-2-2',
-              title: 'Node3-2-2',
-            },
-            {
-              value: 'Node3-2-3',
-              title: 'Node3-2-3',
-            },
-            {
-              value: 'Node3-2-4',
-              title: 'Node3-2-4',
-            },
-            {
-              value: 'Node3-2-5',
-              title: 'Node3-2-5',
-            },
-          ]
-        },
-      ],
-    },
-  ]);
+  const [data] = useState(
+    [
+      {
+        value: '330000',
+        title: '浙江省',
+        children: [
+          {
+            value: '330100',
+            title: '杭州市',
+            children: [
+              {
+                value: '330106',
+                title: '西湖区',
+              },
+              {
+                value: '330107',
+                title: '余杭区',
+              },
+            ],
+          },
+          {
+            value: '330200',
+            title: '温州市',
+            children: [
+              {
+                value: '330206',
+                title: '龙湾区',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        value: '120000',
+        title: '新疆维吾尔自治区',
+        children: [
+          {
+            value: '120100',
+            title: '博尔塔拉蒙古自治州',
+          },
+        ],
+      },
+    ]
+  );
 
   return (
     <>

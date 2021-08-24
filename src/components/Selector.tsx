@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { forwardRef, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { TreeNode } from "../index.d";
 import { CascaderPlusProps } from "./CascaderPlus";
 import Tag from './Tag';
@@ -52,6 +52,7 @@ const Selector = (props: SelectorProps) => {
     selectLeafOnly,
     getPopupContainer,
     maxTagCount,
+    simplify,
     ...rest
   } = props;
 
@@ -63,11 +64,15 @@ const Selector = (props: SelectorProps) => {
     setSearchInputFocus,
     searchInputFocus,
     popupVisible,
+    unSimplify,
+    unSimplifyValues,
+    unSimplifyItems,
   } = CascaderPlusContainer.useContainer();
 
 
 
   const selectedItemsMap = keyBy(selectedItems, 'value');
+  const unSimplifyItemsMap = keyBy(unSimplifyItems, 'value');
   const [inputValue, setInputValue] = useState<string>('');
   const [inputWidth, setInputWidth] = React.useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -77,15 +82,16 @@ const Selector = (props: SelectorProps) => {
 
 
   const renderItem = useCallback((item: string) => {
+    const itemData = unSimplify ? unSimplifyItemsMap[item] : selectedItemsMap[item];
     return (
       <Tag
         key={item}
         onRemove={onRemove}
-        item={selectedItemsMap[item] || item}
+        item={itemData || item}
         renderTitle={renderTitle}
       />
     )
-  }, [selectedItemsMap, renderTitle, onRemove])
+  }, [selectedItemsMap, renderTitle, onRemove,])
 
   const renderRest = useCallback((omittedValues: string[]) => {
     <Tag
@@ -172,7 +178,6 @@ const Selector = (props: SelectorProps) => {
         )
       }
       ref={forwardRef}
-
       {...rest}
     >
       <div className="ant-select-selector"
@@ -183,7 +188,7 @@ const Selector = (props: SelectorProps) => {
           values.length ? (
             <Overflow
               prefixCls={`${prefix}-overflow`}
-              data={values}
+              data={unSimplify ? unSimplifyValues : values}
               renderItem={renderItem}
               renderRest={renderRest}
               maxCount={maxTagCount}

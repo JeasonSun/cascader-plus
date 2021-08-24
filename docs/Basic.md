@@ -14,7 +14,7 @@ order: 2
 - [x] 多选搜索
 - [x] 多选远程搜索
 - [x] 禁用
-- [ ] 设置父级节点选中是否关联
+- [x] 设置父级节点选中是否关联
 - [ ] 自定义值渲染
 - [ ] 自定义Item样式
 - [ ] 单选
@@ -43,6 +43,9 @@ order: 2
 </code>
 
 <code src="./demos/searchRemoteData.tsx">
+</code>
+
+<code src="./demos/simplify.tsx">
 </code>
 
 

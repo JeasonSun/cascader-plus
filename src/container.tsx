@@ -3,6 +3,7 @@ import { createContainer } from 'unstated-next';
 import { TreeNode, ValueType } from './index.d';
 import { CascaderPlusProps } from './components/CascaderPlus';
 import {
+  findAllChildren,
   findNodeByValue,
   flattenAllChildren,
   flattenTree,
@@ -21,6 +22,7 @@ const useCascader = (params?: CascaderPlusProps) => {
     onChange,
     loadData,
     filter,
+    simplify
   } = params || {};
 
   const [popupVisible, setPopupVisible] = useState(false);
@@ -42,11 +44,13 @@ const useCascader = (params?: CascaderPlusProps) => {
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
   const [searchData, setSearchData] = useState<TreeNode[]>([]);
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
+  const [unSimplify, setUnSimplify] = useState<boolean>(!simplify);
+
+
 
 
   const filterLocalData = useCallback((value: string) => {
     const filterData = flattenData.filter((node: TreeNode) => {
-      //
       return value === node.title;
     })
     return Promise.resolve(filterData)
@@ -56,25 +60,9 @@ const useCascader = (params?: CascaderPlusProps) => {
 
   const [searchInputFocus, setSearchInputFocus] = useState<boolean>(false);
 
-  // const selectedItems = useMemo(() => {
-  //   return flattenData.filter((node: TreeNode) => {
-  //     return (value).includes(node.value);
-  //   })
-
-  // }, [flattenData, value])
-
-
-
   const transformValue = useCallback(
     (value: ValueType[], type?: string) => {
-      // console.log('transformValue', value, type, flattenData)
       const nextValue = originalTransformValue(value, flattenData)
-
-      // TODO:
-      // if (onChange && !shallowEqualArray(nextValue, value)) {
-      //   requestAnimationFrame(() => triggerChange(nextValue))
-      // }
-
       return nextValue
     },
     [flattenData]
@@ -111,6 +99,13 @@ const useCascader = (params?: CascaderPlusProps) => {
     })
 
   }, [flattenData, value])
+
+  const [unSimplifyValues, unSimplifyItems] = useMemo(() => {
+    if (unSimplify) {
+      return findAllChildren(value, flattenData);
+    }
+    return [[], []]
+  }, [flattenData, value, unSimplify])
 
   // 这个主要提供给selector的remove使用。
   const triggerChange = useCallback(
@@ -184,6 +179,7 @@ const useCascader = (params?: CascaderPlusProps) => {
     }, [flattenData]);
 
 
+
   // TODO: selectAll如何特殊处理？
   const resetMenuState = useCallback(() => {
     if (selectAll && flattenData.length === 1) {
@@ -205,7 +201,9 @@ const useCascader = (params?: CascaderPlusProps) => {
 
   useEffect(() => {
     if (onChange) {
-      onChange(value, selectedItems.slice(0))
+      unSimplify ?
+        onChange(unSimplifyValues, unSimplifyItems.slice(0)) :
+        onChange(value, selectedItems.slice(0))
     }
   }, [selectedItems])
 
@@ -262,6 +260,9 @@ const useCascader = (params?: CascaderPlusProps) => {
     searchInputFocus,
     setSearchInputFocus,
     searchLoading,
+    unSimplify,
+    unSimplifyValues,
+    unSimplifyItems,
   }
 }
 

@@ -1,6 +1,11 @@
+/**
+ * title: 合并展示选项
+ * desc: simplify默认为true，举例来说，开启后当四川省下所有的市都被选中时，输入框中仅展示四川省，不会展开各个具体的市。可以通过设置simplify为false，不合并展示选项。
+ *
+ */
+
 import React, { useState } from 'react';
-import CascaderPlus from 'cascader-plus';
-import { UnorderedListOutlined } from '@ant-design/icons';
+import CascaderPlus, { TreeNode } from 'cascader-plus';
 import 'antd/dist/antd.css';
 
 const DefaultDemo = () => {
@@ -49,15 +54,12 @@ const DefaultDemo = () => {
     ]
   );
 
-  const [value, setValue] = useState<string[]>(['330000']);
-
-
 
   return (
     <>
       <CascaderPlus
         data={data}
-        defaultValue={value}
+        simplify={false}
       />
     </>
   );

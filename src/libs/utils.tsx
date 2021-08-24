@@ -265,14 +265,14 @@ export function findNodeByValue(
 //   return true
 // }
 
-export function flattenAllChildren(tree: TreeNode[]): TreeNode[] {
+export function flattenAllChildren(tree: TreeNode[], joinStr:string = ' / '): TreeNode[] {
   const AllChildren: TreeNode[] = [];
   function dfs(nodes: TreeNode[]) {
     nodes.forEach((node: TreeNode) => {
       const parentTitles = node.parent?._titles? node.parent?._titles : node.parent ? [node.parent.title] : [];
       node._titles = [...parentTitles, node.title];
       if (node.isLeaf || node.children === undefined) {
-        const item = { ...node, ...{ title: node._titles?.join('/') } }
+        const item = { ...node, ...{ title: node._titles?.join(joinStr) } }
         AllChildren.push(item)
       }
       if (node.children && node.children.length) {
@@ -284,4 +284,36 @@ export function flattenAllChildren(tree: TreeNode[]): TreeNode[] {
   dfs(tree);
   // console.log(AllChildren)
   return AllChildren;
+}
+
+export function findAllChildren(
+  value: ValueType[],
+  flattenData: TreeNode[]
+):[ValueType[],TreeNode[]]{
+  const AllChildren: TreeNode[] = [];
+  const AllChildrenIds: ValueType[] = [];
+  function dfs(nodes: TreeNode[]) {
+    nodes.forEach((node: TreeNode) => {
+      const parentTitles = node.parent?._titles? node.parent?._titles : node.parent ? [node.parent.title] : [];
+      node._titles = [...parentTitles, node.title];
+      if (node.isLeaf || node.children === undefined) {
+        if(!AllChildrenIds.includes(node.value)){
+          AllChildrenIds.push(node.value);
+          AllChildren.push(node);
+        }
+
+      }
+      if (node.children && node.children.length) {
+        dfs(node.children);
+      }
+    })
+  }
+
+  for(let i =0;i<value.length;i++){
+    const node = flattenData.find((item) => item.value === value[i])
+    if (node) {
+      dfs([node]);
+    }
+  }
+  return [AllChildrenIds, AllChildren];
 }
