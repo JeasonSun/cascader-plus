@@ -13,8 +13,7 @@ order: 2
 - [x] 动态加载下一级
 - [x] 多选搜索
 - [x] 多选远程搜索
-- [ ] 滚动加载
-- [ ] 禁用
+- [x] 禁用
 - [ ] 设置父级节点选中是否关联
 - [ ] 自定义值渲染
 - [ ] 自定义Item样式
@@ -32,6 +31,9 @@ order: 2
   src="./demos/defaultValue.tsx" 
   title="默认展开值" 
   desc="通过使用value设置默认值">
+</code>
+
+<code src="./demos/disabled.tsx">
 </code>
 
 <code src="./demos/asyncData.tsx">

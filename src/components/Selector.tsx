@@ -137,7 +137,7 @@ const Selector = (props: SelectorProps) => {
   }, [showSearch, searchInputFocus, popupVisible])
 
   const onSelectFocus = useCallback((e) => {
-    if (searchInputFocus || popupVisible) {
+    if (searchInputFocus || showSearch && popupVisible) {
       e.stopPropagation()
     }
     if (showSearch && !searchInputFocus) {
