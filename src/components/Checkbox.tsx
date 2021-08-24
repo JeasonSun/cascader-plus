@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Checkbox } from 'antd'
+import { Checkbox } from 'antd';
 import { MenuItemProps } from "./MenuItem";
 import CascaderPlusContainer from '../container';
 import { CheckboxChangeEvent } from "antd/lib/checkbox";

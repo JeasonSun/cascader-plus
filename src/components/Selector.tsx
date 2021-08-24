@@ -64,11 +64,14 @@ const Selector = (props: SelectorProps) => {
     popupVisible,
   } = CascaderPlusContainer.useContainer();
 
+
+
   const selectedItemsMap = keyBy(selectedItems, 'value');
   const [inputValue, setInputValue] = useState<string>('');
   const [inputWidth, setInputWidth] = React.useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const measureRef = React.useRef<HTMLDivElement>(null);
+  const searchPlaceholder = '请选择或输入搜索';
 
 
   const renderItem = useCallback((item: string) => {
@@ -138,7 +141,7 @@ const Selector = (props: SelectorProps) => {
 
 
   useEffect(() => {
-    if(!popupVisible){
+    if (!popupVisible) {
       setInputValue('');
     }
   }, [popupVisible])
@@ -177,12 +180,12 @@ const Selector = (props: SelectorProps) => {
                     <input
                       style={{
                         ...inputStyle,
-                        background: 'rgba(0, 0, 0, 0.1)',
                         width: inputWidth,
-                        minWidth: 10,
+                        minWidth: 130,
                         maxWidth: '100%',
                       }}
                       value={inputValue}
+                      placeholder={searchPlaceholder}
                       onClick={onSearchInputClick}
                       onChange={onSearchInputChange}
                       onBlur={onSearchInputBlur}
@@ -209,10 +212,10 @@ const Selector = (props: SelectorProps) => {
             <input
               className={`${prefix}-placeholder`}
               value={inputValue}
-              placeholder={placeholder}
+              placeholder={showSearch ? searchPlaceholder : placeholder}
               style={{
                 ...inputStyle,
-                minWidth: 10,
+                minWidth: 130,
                 maxWidth: '100%',
                 backgroundColor: "none"
               }}
