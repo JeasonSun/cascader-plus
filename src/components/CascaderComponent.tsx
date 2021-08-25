@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Trigger from 'rc-trigger';
 import { ConfigContext } from 'antd/lib/config-provider';
 import { CascaderPlusProps } from './CascaderPlus';
@@ -17,7 +17,6 @@ const CascaderComponent = React.memo(
     const selectorRef = useRef(null);
     const {
       disabled,
-      popupTransitionName = 'slide-up',
       getPopupContainer,
       showSearch
     } = props;
@@ -25,9 +24,7 @@ const CascaderComponent = React.memo(
     const {
       popupVisible,
       setPopupVisible,
-      flattenData,
       value,
-      resetMenuState,
       triggerChange,
       triggerSearchChange,
       searchValue,
@@ -72,7 +69,6 @@ const CascaderComponent = React.memo(
         }}
         builtinPlacements={BUILT_IN_PLACEMENTS}
         popupPlacement="bottomLeft"
-        // popupTransitionName={popupTransitionName}
         getPopupContainer={getPopupContainer || getContextPopupContainer}
       >
 

@@ -31,4 +31,13 @@ order: 2
 <code src="./demos/simplify.tsx">
 </code>
 
+<code src="./demos/renderTitle.tsx">
+</code>
+
+<code src="./demos/renderItem.tsx">
+</code>
+
+<code src="./demos/leafOnly.tsx">
+</code>
+
 

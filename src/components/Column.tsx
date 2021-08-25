@@ -1,6 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { CascaderPlusProps } from "./CascaderPlus";
-import CascaderPlusContainer from '../container';
 import { prefix } from '../constants';
 import { TreeNode } from '../index.d';
 import MenuItem from './MenuItem';

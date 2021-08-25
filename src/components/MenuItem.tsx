@@ -20,6 +20,7 @@ export default React.memo((props: MenuItemProps) => {
     selectLeafOnly,
     menuPath,
     handleCascaderChange,
+    renderMenuItem
   } = CascaderPlusContainer.useContainer();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,6 +42,8 @@ export default React.memo((props: MenuItemProps) => {
     handleCascaderChange(node, depth);
   }, [node, depth])
 
+
+
   return (
     <li className = {cls} onClick = {handleClick}>
       {checkboxHidden ? null : <Checkbox node={node} />}
@@ -48,7 +51,7 @@ export default React.memo((props: MenuItemProps) => {
         className={`${prefix}-column-item-label`}
         style={{ paddingLeft: checkboxHidden ? "0px" : '' }}
       >
-        <span>{title}</span>
+        <span>{renderMenuItem?.(node) || title}</span>
       </p>
       {!hasChildren ? null : loading && !children?.length ? (
         <LoadingOutlined className={`${prefix}-column-item-icon`} />

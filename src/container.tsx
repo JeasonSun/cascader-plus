@@ -22,7 +22,9 @@ const useCascader = (params?: CascaderPlusProps) => {
     onChange,
     loadData,
     filter,
-    simplify
+    simplify,
+    renderMenuItem,
+    selectLeafOnly,
   } = params || {};
 
   const [popupVisible, setPopupVisible] = useState(false);
@@ -213,7 +215,6 @@ const useCascader = (params?: CascaderPlusProps) => {
 
   // 只要有data的变化，就需要对data进行展开处理。
   useEffect(() => {
-    // console.log('监测到data,selectAll的变化')
     setFlattenData((): TreeNode[] => {
       if (selectAll) {
         return flattenTree([
@@ -232,37 +233,32 @@ const useCascader = (params?: CascaderPlusProps) => {
   // popup变化后，开始初始化menu和value.
   useEffect(() => {
     if (popupVisible) {
-      // console.log('监测到popupVisible的变化')
-      // setValue(transformValue(valueProp || value , 'effect'));
-      // setValue(transformValue(value , 'effect'));
       resetMenuState();
       resetSearchState();
     }
   }, [popupVisible])
 
-
-
-
   return {
-    popupVisible,
-    setPopupVisible,
-    menuData,
-    handleCascaderChange,
-    menuPath,
-    handleSelectChange,
     value,
-    // hackValue,
+    popupVisible,
+    menuData,
+    menuPath,
     selectedItems,
-    triggerChange,
     searchData,
     searchValue,
-    triggerSearchChange,
     searchInputFocus,
-    setSearchInputFocus,
     searchLoading,
     unSimplify,
     unSimplifyValues,
     unSimplifyItems,
+    selectLeafOnly,
+    setPopupVisible,
+    handleCascaderChange,
+    handleSelectChange,
+    triggerChange,
+    triggerSearchChange,
+    setSearchInputFocus,
+    renderMenuItem
   }
 }
 

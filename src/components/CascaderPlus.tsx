@@ -10,27 +10,26 @@ import '../index.less';
 export interface CascaderPlusProps {
   defaultValue?: ValueType[];
   data?: TreeNode[];
-  allowClear?: boolean;
-  columnWidth?: number;
   placeholder?: string;
-  onChange?: (newValue: ValueType[], selectedItems?: TreeNode[]) => void;
-  loadData?: (node:TreeNode) => Promise<[TreeNode[], TreeNode]>;
-  showSearch?: boolean;
-  filter?: (value: String) => Promise<TreeNode[]>;
-  selectAll?: boolean;
   className?: string;
   style?: React.CSSProperties;
   disabled?: boolean;
-  searchable?: boolean;
   simplify?: boolean;
-  okText?: string;
-  cancelText?: string;
-  selectAllText?: string;
-  popupTransitionName?: string;
-  selectLeafOnly?: boolean;
-  renderTitle?: (value: string) => ReactNode | undefined;
+  showSearch?: boolean;
+
+  onChange?: (newValue: ValueType[], selectedItems?: TreeNode[]) => void;
+  loadData?: (node:TreeNode) => Promise<[TreeNode[], TreeNode]>;
+  filter?: (value: String) => Promise<TreeNode[]>;
+  renderTitle?: (value: string, item: TreeNode) => ReactNode | undefined;
+  renderMenuItem?:(item: TreeNode) => ReactNode;
   getPopupContainer?: (props: any) => HTMLElement;
+
   maxTagCount?: number | 'responsive';
+  allowClear?: boolean;
+  columnWidth?: number;
+  selectLeafOnly?: boolean;
+  selectAll?: boolean;
+
 }
 
 const CascaderPlus: React.FunctionComponent<CascaderPlusProps> = React.forwardRef((props: CascaderPlusProps, ref) => {

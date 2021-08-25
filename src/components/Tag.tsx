@@ -15,7 +15,7 @@ const Tag = (props: TagProps) => {
   const {
     onRemove,
     item,
-    renderTitle = () => undefined,
+    renderTitle = (value: string, item: TreeNode) => undefined,
     closable = true,
   } = props;
   const handleRemove = (
@@ -28,7 +28,7 @@ const Tag = (props: TagProps) => {
   }
 
   const value = (item.value || item) as string;
-  const title = renderTitle(value) || item.title || item;
+  const title = renderTitle(value, item) || item.title || item;
   return (
     <span className="ant-select-selection-item">
       <span className="ant-select-selection-item-content">{title}</span>

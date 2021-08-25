@@ -3,7 +3,7 @@
 ---
 ## CascaderPlus介绍
 
-基于 ant-design 级联组件 cascader 的扩展，主要实现级联选择的多选功能，并且支持本地及远程搜索。
+扩展 ant-design 级联组件 cascader，实现级联选择的多选功能，并且支持本地及远程搜索。
 
 ### 功能
 
@@ -14,10 +14,12 @@
 - [x] 多选远程搜索
 - [x] 禁用
 - [x] 设置父级节点选中是否关联
-- [ ] 自定义值渲染
-- [ ] 自定义Item样式
+- [x] 自定义值渲染
+- [x] 自定义Item样式
+- [x] selectLeafOnly只允许选择Leaf节点
+- [ ] allowClear
+- [ ] selectAll
 - [ ] 单选
-
 
 
 ### 库与知识点
