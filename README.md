@@ -4,6 +4,21 @@
 
 扩展 ant-design 级联组件 cascader，实现级联选择的多选功能，并且支持本地及远程搜索。
 
+## 主页
+
+### [CascaderPlusAPI文档](https://jeasonsun.github.io/cascader-plus/)
+
+### 功能截图
+
+#### 异步获取数据
+
+![异步获取数据](./docs/images/loadData.gif)
+
+#### 多选远程搜索
+
+![多选远程搜索](./docs/images/search.gif)
+
+
 ## 功能
 
 - [x] 多选功能
@@ -41,5 +56,3 @@ $ npm run docs:build
 ```
 
 
-## 主页
-[CascaderPlus主页](https://jeasonsun.github.io/cascader-plus/)
