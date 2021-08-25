@@ -1,4 +1,4 @@
-import { TreeNode, ValueType } from '../index.d';
+import { TreeNode, ValueType } from '../types';
 import { All } from '../index';
 
 // 平铺树结构， 方便根据value（字符串）获取到所有的NodeItem 节点

@@ -2,7 +2,7 @@ import React, {
   ReactNode
 } from 'react';
 import CascaderPlusContainer from '../container';
-import { TreeNode, ValueType } from '../index.d';
+import { TreeNode, ValueType } from '../types';
 import CascaderComponent from './CascaderComponent';
 
 import '../index.less';
@@ -19,7 +19,7 @@ export interface CascaderPlusProps {
 
   onChange?: (newValue: ValueType[], selectedItems?: TreeNode[]) => void;
   loadData?: (node:TreeNode) => Promise<[TreeNode[], TreeNode]>;
-  filter?: (value: String) => Promise<TreeNode[]>;
+  filter?: (value: string) => Promise<TreeNode[]>;
   renderTitle?: (value: string, item: TreeNode) => ReactNode | undefined;
   renderMenuItem?:(item: TreeNode) => ReactNode;
   getPopupContainer?: (props: any) => HTMLElement;

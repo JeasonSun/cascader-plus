@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CascaderPlus from 'cascader-plus';
-import { UnorderedListOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css';
+
 
 const DefaultDemo = () => {
   const [data] = useState(

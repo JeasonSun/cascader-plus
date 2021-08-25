@@ -1,5 +1,3 @@
-import React from 'react'
-
 export type ValueType = string
 
 export type TreeNode = {

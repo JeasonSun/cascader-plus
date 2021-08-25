@@ -3,7 +3,7 @@ import { Empty } from 'antd';
 import { CascaderPlusProps } from "./CascaderPlus";
 import CascaderPlusContainer from '../container';
 import { prefix } from '../constants';
-import { TreeNode } from "../index.d";
+import { TreeNode } from "../types";
 import Checkbox from "./Checkbox";
 import { LoadingOutlined } from "@ant-design/icons";
 

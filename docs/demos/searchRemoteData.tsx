@@ -4,8 +4,8 @@
  *
  */
 import React, { useState } from 'react';
-import CascaderPlus from 'cascader-plus';
-import 'antd/dist/antd.css';
+import CascaderPlus,{ TreeNode } from 'cascader-plus';
+
 
 const DefaultDemo = () => {
   const [data] = useState([
@@ -67,7 +67,7 @@ const DefaultDemo = () => {
 
 
   const filterData = (key: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<TreeNode[]>((resolve, reject) => {
        setTimeout(() => {
         const res = [];
         for(let i =0;i< 5;i++){

@@ -1,5 +1,5 @@
-import React, { forwardRef, Ref, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { TreeNode } from "../index.d";
+import React, {  Ref, useCallback, useEffect, useLayoutEffect,useRef, useState } from "react";
+import { TreeNode } from "../types";
 import { CascaderPlusProps } from "./CascaderPlus";
 import Tag from './Tag';
 import { keyBy } from 'lodash';
@@ -245,7 +245,7 @@ const Selector = (props: SelectorProps) => {
             />
         }
       </div>
-      <span className="ant-cascader-picker-arrow">
+      <span className="ant-select-arrow">
         <DownOutlined />
       </span>
     </div>

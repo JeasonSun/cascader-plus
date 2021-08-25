@@ -7,7 +7,7 @@ import { prefix } from '../constants';
 import Popup from './Popup';
 import BUILT_IN_PLACEMENTS from '@/libs/placement';
 import Selector from './Selector';
-import { TreeNode } from '../index.d';
+import { TreeNode } from '../types';
 import { reconcile } from '@/libs/utils';
 import PopupSearch from './PopupSearch';
 

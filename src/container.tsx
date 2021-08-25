@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { createContainer } from 'unstated-next';
-import { TreeNode, ValueType } from './index.d';
+import { TreeNode, ValueType } from './types';
 import { CascaderPlusProps } from './components/CascaderPlus';
 import {
   findAllChildren,

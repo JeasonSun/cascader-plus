@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { prefix } from '../constants';
-import { TreeNode } from '../index.d';
+import { TreeNode } from '../types';
 import MenuItem from './MenuItem';
 
 interface ColumnProps {

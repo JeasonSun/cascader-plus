@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import { RightOutlined, LoadingOutlined } from '@ant-design/icons';
-import { TreeNode } from '../index.d';
+import { TreeNode } from '../types';
 import CascaderPlusContainer from '../container';
 import Checkbox from './Checkbox';
 import { prefix } from '../constants';

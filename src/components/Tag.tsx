@@ -1,7 +1,7 @@
 
 import { CloseOutlined } from '@ant-design/icons';
 import React from 'react';
-import { TreeNode } from '../index.d';
+import { TreeNode } from '../types';
 import { SelectorProps } from './Selector';
 
 interface TagProps {

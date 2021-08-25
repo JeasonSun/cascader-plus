@@ -5,8 +5,8 @@
  */
 
 import React, { useState } from 'react';
-import CascaderPlus, { TreeNode } from 'cascader-plus';
-import 'antd/dist/antd.css';
+import CascaderPlus  from 'cascader-plus';
+
 
 const DefaultDemo = () => {
   const [data] = useState(

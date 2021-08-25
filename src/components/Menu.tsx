@@ -3,7 +3,7 @@ import { CascaderPlusProps } from "./CascaderPlus";
 import CascaderPlusContainer from '../container';
 import { prefix } from '../constants';
 import Column from './Column';
-import { TreeNode } from '../index.d';
+import { TreeNode } from '../types';
 
 const Menu = (props: CascaderPlusProps) => {
   const { columnWidth } = props;
